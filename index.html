@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miniskog Helsingborg</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-deep: #1a3a1f;
+            --green-mid: #2d5a34;
+            --green-pale: #b8d9bc;
+            --gold: #c8a84b;
+            --cream: #f5f0e8;
+            --white: #ffffff;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Lato', sans-serif; color: var(--green-deep); background: var(--cream); overflow-x: hidden; }
+
+        /* NAV */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--white); font-weight: 900; }
+        .nav-logo span { color: var(--gold); }
+        nav ul { list-style: none; display: flex; gap: 3rem; }
+        nav ul a { text-decoration: none; color: var(--white); font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
+
+        /* HERO MED BÄTTRE TEXTTYDLIGHET */
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+        
+        /* Mörkt skikt för att texten ska synas bättre */
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); z-index: 0; }
+
+        .hero-content { position: relative; z-index: 10; max-width: 900px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        
+        .fade-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 1.2s ease forwards; }
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1.5s; }
+        .delay-3 { animation-delay: 2.5s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5rem); color: var(--white); margin-bottom: 1.5rem; }
+        .hero-sub { font-size: 1.3rem; color: var(--white); margin-bottom: 3rem; }
+        .hero-cta { display: flex; gap: 1.5rem; justify-content: center; }
+        .btn-gold { background: var(--gold); color: var(--green-deep); padding: 1rem 2.5rem; border-radius: 4px; font-weight: 700; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); padding: 1rem 2.5rem; border-radius: 4px; text-transform: uppercase; text-decoration: none; background: transparent; cursor: pointer; }
+
+        /* STORY */
+        .story-section { padding: 5rem 2rem; background: var(--cream); text-align: center; }
+        .story-container { max-width: 800px; margin: 0 auto; }
+        .story-img { width: 100%; border-radius: 12px; margin-bottom: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .story-content p { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-deep); line-height: 1.8; margin-bottom: 1.5rem; }
+        .story-content strong { display: block; font-size: 1.2rem; color: var(--gold); margin-top: 1rem; }
+
+        /* CONTACT - GRÖN BAKGRUND */
+        .contact-section { background: var(--green-deep); padding: 6rem 2rem; text-align: center; color: var(--white); }
+        .contact-form { max-width: 600px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 1rem; }
+        .contact-form input, .contact-form textarea { padding: 1rem; border: none; border-radius: 4px; }
+        .btn-submit { background: var(--gold); color: var(--green-deep); border: none; padding: 1.2rem; text-transform: uppercase; font-weight: 700; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">Mini<span>skog</span> Helsingborg</div>
+        <ul>
+            <li><a href="#om">Vision</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video-bg" id="heroVideo">
+            <source src="HemsidSKogsfeeling.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div> <div class="hero-content">
+            <h1 class="fade-in delay-1">Välkommen till din skog!</h1>
+            <p class="hero-sub fade-in delay-2">Där människor och biologisk mångfald får växa tillsammans.</p>
+            <div class="hero-cta fade-in delay-3">
+                <button class="btn-gold" onclick="toggleMute()" id="muteBtn">Ljud PÅ</button>
+                <a href="#kontakt" class="btn-outline">Plantera din miniskog</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="story-section" id="om">
+        <div class="story-container">
+            <img src="miniskogar_land_storstad.jpg" alt="Relationen mellan gård och stad" class="story-img">
+            <div class="story-content">
+                <p>För inte så länge sedan var vi helt beroende av naturen och dess villkor. Vi var ett med vår gård, platsen vi växte upp på och kanske aldrig flyttade ifrån. Nu är det många som inte känner sin granne, inte jobbar där man bor, och har rest över flera världsdelar men inte vet att en hamburgare en gång var ett djur som betade på ängen.</p>
+                <strong>Det var inte bättre förr men vi kan göra det bättre nu.</strong>
+                <p style="margin-top:2rem; font-weight:700;">En liten bit i pusslet är att göra stadsmiljöer grönare och du kan hjälpa till!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="kontakt">
+        <h2 style="font-family:'Playfair Display',serif; font-size:2.5rem;">Plantera en miniskog</h2>
+        <form class="contact-form" onsubmit="return false;">
+            <input type="text" placeholder="Namn">
+            <input type="email" placeholder="E-post">
+            <textarea placeholder="Berätta om din idé..." rows="5"></textarea>
+            <button class="btn-submit">Skicka förfrågan</button>
+        </form>
+    </section>
+
+    <script>
+        const video = document.getElementById('heroVideo');
+        const btn = document.getElementById('muteBtn');
+        function toggleMute() {
+            video.muted = !video.muted;
+            btn.textContent = video.muted ? "Ljud PÅ" : "Ljud AV";
+        }
+    </script>
+</body>
+</html>
