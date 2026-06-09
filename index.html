@@ -26,31 +26,32 @@
         nav ul { list-style: none; display: flex; gap: 3rem; }
         nav ul a { text-decoration: none; color: var(--white); font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
 
-        /* HERO MED BÄTTRE TEXTTYDLIGHET */
+        /* GEMENSAMMA HERO-INSTÄLLNINGAR FÖR BÅDA BILDERNA */
         .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
-        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-        
-        /* Mörkt skikt för att texten ska synas bättre */
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); z-index: 0; }
-
+        .hero-img-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.35); z-index: 0; } /* Skikt för textkontrast */
         .hero-content { position: relative; z-index: 10; max-width: 900px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        
+
+        /* ANIMATIONER */
         .fade-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 1.2s ease forwards; }
         .delay-1 { animation-delay: 0.5s; }
         .delay-2 { animation-delay: 1.5s; }
         .delay-3 { animation-delay: 2.5s; }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
+        /* TYPOGRAFI */
         .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 7vw, 5rem); color: var(--white); margin-bottom: 1.5rem; }
         .hero-sub { font-size: 1.3rem; color: var(--white); margin-bottom: 3rem; }
         .hero-cta { display: flex; gap: 1.5rem; justify-content: center; }
         .btn-gold { background: var(--gold); color: var(--green-deep); padding: 1rem 2.5rem; border-radius: 4px; font-weight: 700; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; }
         .btn-outline { border: 2px solid var(--white); color: var(--white); padding: 1rem 2.5rem; border-radius: 4px; text-transform: uppercase; text-decoration: none; background: transparent; cursor: pointer; }
 
+        /* MELLANRUM */
+        .spacer { height: 10vh; background-color: var(--cream); } /* Ger ett tydligt uppdelande mellanrum */
+
         /* STORY */
         .story-section { padding: 5rem 2rem; background: var(--cream); text-align: center; }
         .story-container { max-width: 800px; margin: 0 auto; }
-        .story-img { width: 100%; border-radius: 12px; margin-bottom: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .story-content p { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-deep); line-height: 1.8; margin-bottom: 1.5rem; }
         .story-content strong { display: block; font-size: 1.2rem; color: var(--gold); margin-top: 1rem; }
 
@@ -72,22 +73,30 @@
     </nav>
 
     <section class="hero">
-        <video autoplay muted loop playsinline class="hero-video-bg" id="heroVideo">
-            <source src="HemsidSKogsfeeling.mp4" type="video/mp4">
-        </video>
+        <img src="miniskogar_presentation.png" alt="Relationen mellan gård och stad presentation" class="hero-img-bg">
         <div class="hero-overlay"></div> <div class="hero-content">
             <h1 class="fade-in delay-1">Välkommen till din skog!</h1>
             <p class="hero-sub fade-in delay-2">Där människor och biologisk mångfald får växa tillsammans.</p>
             <div class="hero-cta fade-in delay-3">
-                <button class="btn-gold" onclick="toggleMute()" id="muteBtn">Ljud PÅ</button>
-                <a href="#kontakt" class="btn-outline">Plantera din miniskog</a>
+                <a href="#kontakt" class="btn-gold">Plantera din miniskog</a>
             </div>
         </div>
     </section>
 
+    <div class="spacer"></div>
+
+    <section class="hero">
+        <img src="trädkronor_underifrån.png" alt="Trädkronor sedda underifrån presentation" class="hero-img-bg">
+        <div class="hero-overlay"></div> <div class="hero-content">
+            <h1 class="fade-in delay-1">Framtiden är grön</h1>
+            <p class="hero-sub fade-in delay-2">Tillsammans skapar vi levande städer.</p>
+        </div>
+    </section>
+
+    <div class="spacer"></div>
+
     <section class="story-section" id="om">
         <div class="story-container">
-            <img src="miniskogar_land_storstad.png" alt="Relationen mellan gård och stad" class="story-img">
             <div class="story-content">
                 <p>För inte så länge sedan var vi helt beroende av naturen och dess villkor. Vi var ett med vår gård, platsen vi växte upp på och kanske aldrig flyttade ifrån. Nu är det många som inte känner sin granne, inte jobbar där man bor, och har rest över flera världsdelar men inte vet att en hamburgare en gång var ett djur som betade på ängen.</p>
                 <strong>Det var inte bättre förr men vi kan göra det bättre nu.</strong>
@@ -106,13 +115,5 @@
         </form>
     </section>
 
-    <script>
-        const video = document.getElementById('heroVideo');
-        const btn = document.getElementById('muteBtn');
-        function toggleMute() {
-            video.muted = !video.muted;
-            btn.textContent = video.muted ? "Ljud PÅ" : "Ljud AV";
-        }
-    </script>
 </body>
 </html>
